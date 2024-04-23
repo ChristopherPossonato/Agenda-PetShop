@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=agendapet'
+      - 'MYSQL_PASSWORD=${DATASOURCE_PASSWORD}'
+      - 'MYSQL_ROOT_PASSWORD=${DATASOURCE_PASSWORD}'
+      - 'MYSQL_USER=${DATASOURCE_USER}''
+    ports:
+      - '3306'
