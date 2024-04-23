@@ -59,7 +59,7 @@ public class AgendaServiceImpl implements AgendaService {
         // Salva os animais associados ao novo tutor
         agenda.getTutor().getAnimais().forEach(a -> {
             var salvarAnimal = Animal.builder()
-                    .nome(a.getNome())
+                    .nomeAnimal(a.getNomeAnimal())
                     .raca(a.getRaca())
                     .porte(a.getPorte())
                     .tutor(tutorSalvo) // Usa o tutor recém-salvo para associar aos animais
@@ -72,7 +72,7 @@ public class AgendaServiceImpl implements AgendaService {
 
         agenda.setStatusAgendamento(StatusAgendamento.PENDENTE);
         agenda.setStatus(true);
-        agenda.setDataVencimento(DataExpiracaoUtil.calcularDataExpiracao(agenda.getDataHora(), agenda.getPacote()));
+        agenda.setDataVencimento(DataExpiracaoUtil.calcularDataExpiracao(agenda.getDataHora(), agenda.getTabelaServico().getPacote()));
         agendaRepository.save(agenda);
 
         return mapper.map(agenda, AgendaDto.class);

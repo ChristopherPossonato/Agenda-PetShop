@@ -1,4 +1,4 @@
-package br.com.topicosnewm.petshop.entrypoint.model.tabelaprecoservico;
+package br.com.topicosnewm.petshop.entrypoint.model.tabelaservico;
 
 import br.com.topicosnewm.petshop.dataprovider.model.Pacote;
 import br.com.topicosnewm.petshop.dataprovider.model.Porte;
@@ -14,7 +14,7 @@ import lombok.Data;
         "pacote",
         "valor"
 })
-public class TabelaPrecoServicoRequest {
+public class TabelaServicoRequest {
 
     @NotBlank
     private String tipoServico;

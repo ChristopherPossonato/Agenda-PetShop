@@ -1,6 +1,5 @@
 package br.com.topicosnewm.petshop.dataprovider.model;
 
-import br.com.topicosnewm.petshop.dto.FuncionarioDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -10,15 +9,14 @@ import lombok.Data;
 @Table(name = "funcionarios")
 @Data
 public class Funcionario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    private String nome;
+    @Column(name = "nome")
+    private String nomeFuncionario;
     @NotBlank
+    @Column(name = "profissao")
     private String profissao;
-    private Double comissao;
-
 
 }

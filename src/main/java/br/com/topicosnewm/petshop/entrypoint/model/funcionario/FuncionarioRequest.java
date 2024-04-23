@@ -8,15 +8,14 @@ import lombok.Data;
 
 @Data
 @JsonPropertyOrder({
-        "nome",
+        "nomeFuncionario",
         "profissao",
-        "comissao"
 })
 public class FuncionarioRequest {
     @NotBlank
-    private String nome;
+    private String nomeFuncionario;
     @NotBlank
     private String profissao;
-    private Double comissao;
+
 
 }

@@ -15,15 +15,20 @@ import java.util.List;
 public class Tutor {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private Long id_tutor;
+
         @NotBlank
+        @Column(name = "nome_tutor")
         private String nomeTutor;
+
         @NotBlank
         @Pattern(regexp = "\\(\\d{2}\\)\\s\\d{4,5}-\\d{4}", message = "Formato de telefone inválido")
+        @Column(name = "telefone")
         private String telefone;
+
         @Embedded
         private Endereco endereco;
+
         @OneToMany(mappedBy = "tutor", cascade = CascadeType.PERSIST)
         private List<Animal> animais;
-
 }

@@ -30,9 +30,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     public FuncionarioDto salvar(FuncionarioDto funcionarioDto) {
         var funcionario = mapper.map(funcionarioDto, Funcionario.class);
-        if (funcionario.getComissao() == null) {
-            funcionario.setComissao(0.0);
-        }
+
         var funcionarioSalvo = funcionarioRepository.save(funcionario);
 
         return mapper.map(funcionarioSalvo, FuncionarioDto.class);

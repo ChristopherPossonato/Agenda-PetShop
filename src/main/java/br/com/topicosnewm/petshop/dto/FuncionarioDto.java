@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class FuncionarioDto {
     private Long id;
-    private String nome;
+    private String nomeFuncionario;
     private String profissao;
-    private Double comissao;
+
 }
 

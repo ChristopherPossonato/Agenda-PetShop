@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface UsuarioContaService {
 
     Optional<UsuarioContaDto> buscarPorId(Long id);
-    UsuarioContaDto salvar(UsuarioContaDto usuarioContaDto);
+    UsuarioContaDto criarConta(UsuarioContaDto usuarioContaDto);
     Long alterar(UsuarioContaDto usuarioContaDto);
 
 }

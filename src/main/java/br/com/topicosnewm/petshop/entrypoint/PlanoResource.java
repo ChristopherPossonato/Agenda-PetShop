@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/plano")
+@RequestMapping("/planos")
 @Api(tags = "Cadastro Plano", description = "Controller de cadastro plano")
 public class PlanoResource {
 
@@ -35,7 +35,7 @@ public class PlanoResource {
 
         var usuarioDtoSalvo = planoService.salvar(planoDto);
 
-        var uri = uriComponentsBuilder.path("/plano/{id}").buildAndExpand(usuarioDtoSalvo.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/planos/{id}").buildAndExpand(usuarioDtoSalvo.getId()).toUri();
         return ResponseEntity.created(uri).body(usuarioDtoSalvo);
     }
 

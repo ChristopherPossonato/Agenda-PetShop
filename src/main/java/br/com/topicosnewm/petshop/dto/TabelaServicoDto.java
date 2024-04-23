@@ -5,7 +5,7 @@ import br.com.topicosnewm.petshop.dataprovider.model.Porte;
 import lombok.Data;
 
 @Data
-public class TabelaPrecoServicoDto {
+public class TabelaServicoDto {
     private Long id;
     private String tipoServico;
     private Porte porte;

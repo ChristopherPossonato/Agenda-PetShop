@@ -1,8 +1,8 @@
 package br.com.topicosnewm.petshop.entrypoint;
 
-import br.com.topicosnewm.petshop.dto.TabelaPrecoServicoDto;
-import br.com.topicosnewm.petshop.entrypoint.model.tabelaprecoservico.TabelaPrecoServicoRequest;
-import br.com.topicosnewm.petshop.service.tabelaprecoservico.TabelaPrecoServicoService;
+import br.com.topicosnewm.petshop.dto.TabelaServicoDto;
+import br.com.topicosnewm.petshop.entrypoint.model.tabelaservico.TabelaServicoRequest;
+import br.com.topicosnewm.petshop.service.tabelaservico.TabelaServicoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/tabela/preco")
+@RequestMapping("/servico")
 @Api(tags = "Tabela Serviço", description = "Controller de serviços")
-public class TabelaPrecoServicoResource {
+public class TabelaServicoResource {
 
     @Autowired
-    private TabelaPrecoServicoService tabelaPrecoServicoService;
+    private TabelaServicoService tabelaServicoService;
     @Autowired
     private ModelMapper modelMapper;
 
     @PostMapping
     @ApiOperation(value = "Cadastra novo servico.")
     @Transactional
-    public ResponseEntity salvar(@RequestBody @Valid TabelaPrecoServicoRequest tabelaPrecoServicoRequest, UriComponentsBuilder uriComponentsBuilder) {
-        var precoServicoDto = modelMapper.map(tabelaPrecoServicoRequest, TabelaPrecoServicoDto.class);
+    public ResponseEntity salvar(@RequestBody @Valid TabelaServicoRequest tabelaServicoRequest, UriComponentsBuilder uriComponentsBuilder) {
+        var precoServicoDto = modelMapper.map(tabelaServicoRequest, TabelaServicoDto.class);
 
-        var precoServicoSalvo = tabelaPrecoServicoService.salvar(precoServicoDto);
+        var precoServicoSalvo = tabelaServicoService.salvar(precoServicoDto);
 
 
-        var uri = uriComponentsBuilder.path("/tabela/preco/{id}").buildAndExpand(precoServicoSalvo.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/servico/{id}").buildAndExpand(precoServicoSalvo.getId()).toUri();
         return ResponseEntity.created(uri).body(precoServicoSalvo);
     }
 }

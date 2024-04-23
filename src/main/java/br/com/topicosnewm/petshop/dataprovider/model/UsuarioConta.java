@@ -4,6 +4,7 @@ package br.com.topicosnewm.petshop.dataprovider.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "usuario_conta")
+@Table(name = "usuario_contas")
 @Data
 public class UsuarioConta implements UserDetails {
 
@@ -24,12 +25,14 @@ public class UsuarioConta implements UserDetails {
 
     @NotBlank
     @Column(name = "nome_usuario")
-    private String nome;
+    private String nomeUsuario;
 
     @Column(name = "sobrenome")
     private String sobrenome;
 
-    @Column(name = "cpf_cnpj", nullable = false, unique = true)
+    @Column(name = "cpf_cnpj", unique = true)
+    @NotBlank
+    @Pattern(regexp = "(\\d{11})|(\\d{14})", message = "CPF ou CNPJ inválido")
     private String cpfCnpj;
 
     @Email(message = "Formato do e-mail está incorreto")

@@ -17,28 +17,32 @@ public class Agenda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Column(name = "data_hora")
     private LocalDateTime dataHora;
-
+    @Column(name = "transporte")
     private Boolean transporte;
-    @NotBlank
-    @Enumerated(EnumType.STRING)
-    private Pacote pacote;
+
+    @Column(name = "data_vencimento")
     private LocalDateTime dataVencimento;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_agendamento")
     private StatusAgendamento statusAgendamento;
+
+    @Column(name = "status")
     private Boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "tutor_id", nullable = false)
+    @JoinColumn(name = "id_tutor", nullable = false)
     private Tutor tutor;
 
     @ManyToOne
-    @JoinColumn(name = "animal_id", nullable = false)
-    private Animal animal;
+    @JoinColumn(name = "id_funcionario", nullable = false)
+    private Funcionario  funcionario;
 
     @ManyToOne
-    @JoinColumn(name = "funcionario_id", nullable = false)
-    private Funcionario  funcionario;
+    @JoinColumn(name = "id_tabela_servico", nullable = false)
+    private TabelaServico tabelaServico;
 
 
     public void excluirAgendamento() {

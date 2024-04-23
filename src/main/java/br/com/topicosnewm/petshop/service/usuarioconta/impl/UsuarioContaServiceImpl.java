@@ -35,9 +35,11 @@ public class UsuarioContaServiceImpl implements UsuarioContaService {
     }
 
     @Override
-    public UsuarioContaDto salvar(UsuarioContaDto usuarioContaDto) {
-        //Entidade UsuarioCriacao
+    public UsuarioContaDto criarConta(UsuarioContaDto usuarioContaDto) {
+
         var usuarioCriacao = this.mapper.map(usuarioContaDto, UsuarioConta.class);
+
+
 
         // Entidade Plano
         var tagPlano = planoRepository.getReferenceByTagPlano(usuarioCriacao.getTagPlano());

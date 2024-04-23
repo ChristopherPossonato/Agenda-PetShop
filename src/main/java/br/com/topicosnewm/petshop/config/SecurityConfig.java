@@ -33,12 +33,9 @@ public class SecurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/criacao","/login")
-                        .permitAll()
-                        .requestMatchers(AUTH_WHITELIST)
-                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/criacao","/login").permitAll()
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/planos").hasRole("SUPER_ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

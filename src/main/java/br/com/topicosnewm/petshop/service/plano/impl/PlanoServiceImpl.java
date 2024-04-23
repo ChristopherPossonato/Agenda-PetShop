@@ -1,10 +1,8 @@
 package br.com.topicosnewm.petshop.service.plano.impl;
 
 import br.com.topicosnewm.petshop.dataprovider.model.Plano;
-import br.com.topicosnewm.petshop.dataprovider.model.TabelaPrecoServico;
 import br.com.topicosnewm.petshop.dataprovider.repository.PlanoRepository;
 import br.com.topicosnewm.petshop.dto.PlanoDto;
-import br.com.topicosnewm.petshop.dto.TabelaPrecoServicoDto;
 import br.com.topicosnewm.petshop.service.plano.PlanoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -28,7 +28,7 @@ public class UsuarioContaResource {
     public ResponseEntity salvar(@RequestBody @Valid UsuarioContaRequest usuarioContaRequest, UriComponentsBuilder uriComponentsBuilder) {
         var usuarioDto = mapper.map(usuarioContaRequest, UsuarioContaDto.class);
 
-        var usuarioDtoSalvo = usuarioContaService.salvar(usuarioDto);
+        var usuarioDtoSalvo = usuarioContaService.criarConta(usuarioDto);
 
         var uri = uriComponentsBuilder.path("/criacao/{id}").buildAndExpand(usuarioDtoSalvo.getId()).toUri();
         return ResponseEntity.created(uri).body(usuarioDtoSalvo);
