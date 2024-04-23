@@ -1,8 +1,6 @@
 package br.com.topicosnewm.petshop.entrypoint;
 
-import br.com.topicosnewm.petshop.dataprovider.model.Plano;
 import br.com.topicosnewm.petshop.dto.PlanoDto;
-import br.com.topicosnewm.petshop.dto.UsuarioCriacaoDto;
 import br.com.topicosnewm.petshop.entrypoint.model.plano.PlanoRequest;
 import br.com.topicosnewm.petshop.service.plano.PlanoService;
 import io.swagger.annotations.Api;

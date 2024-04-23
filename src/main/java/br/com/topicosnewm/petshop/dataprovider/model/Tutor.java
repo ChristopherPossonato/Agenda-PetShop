@@ -3,6 +3,7 @@ package br.com.topicosnewm.petshop.dataprovider.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "tutores")
 @Data
+@Builder
 public class Tutor {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

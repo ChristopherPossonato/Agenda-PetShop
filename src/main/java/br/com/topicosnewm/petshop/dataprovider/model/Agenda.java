@@ -2,7 +2,6 @@ package br.com.topicosnewm.petshop.dataprovider.model;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "agendamentos")
 @Data
-public class Agendamento {
+public class Agenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,7 @@ public class Agendamento {
     @NotBlank
     @Enumerated(EnumType.STRING)
     private Pacote pacote;
-    private LocalDate dataVencimento;
+    private LocalDateTime dataVencimento;
     @Enumerated(EnumType.STRING)
     private StatusAgendamento statusAgendamento;
     private Boolean status;
@@ -40,8 +39,6 @@ public class Agendamento {
     @ManyToOne
     @JoinColumn(name = "funcionario_id", nullable = false)
     private Funcionario  funcionario;
-
-    private TabelaPrecoServico tabelaPrecoServico;
 
 
     public void excluirAgendamento() {

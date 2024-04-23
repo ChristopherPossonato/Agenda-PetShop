@@ -1,23 +1,21 @@
-package br.com.topicosnewm.petshop.service.usuariocriacao.impl;
+package br.com.topicosnewm.petshop.service.usuarioconta.impl;
 
-import br.com.topicosnewm.petshop.dataprovider.model.Plano;
-import br.com.topicosnewm.petshop.dataprovider.model.UsuarioCriacao;
+import br.com.topicosnewm.petshop.dataprovider.model.UsuarioConta;
 import br.com.topicosnewm.petshop.dataprovider.repository.PlanoRepository;
-import br.com.topicosnewm.petshop.dataprovider.repository.UsuarioCriacaoRepository;
-import br.com.topicosnewm.petshop.dto.UsuarioCriacaoDto;
-import br.com.topicosnewm.petshop.service.usuariocriacao.UsuarioCriacaoService;
+import br.com.topicosnewm.petshop.dataprovider.repository.UsuarioContaRepository;
+import br.com.topicosnewm.petshop.dto.UsuarioContaDto;
+import br.com.topicosnewm.petshop.service.usuarioconta.UsuarioContaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.Optional;
 @Service
-public class UsuarioCriacaoServiceImpl implements UsuarioCriacaoService {
+public class UsuarioContaServiceImpl implements UsuarioContaService {
     @Autowired
-    private UsuarioCriacaoRepository usuarioCriacaoRepository;
+    private UsuarioContaRepository usuarioContaRepository;
     @Autowired
     private PlanoRepository planoRepository;
     @Autowired
@@ -25,10 +23,10 @@ public class UsuarioCriacaoServiceImpl implements UsuarioCriacaoService {
     @Autowired
     private ModelMapper mapper;
     @Override
-    public Optional<UsuarioCriacaoDto> buscarPorId(Long id) {
-        var usuarioCriacao = usuarioCriacaoRepository.getReferenceById(id);
+    public Optional<UsuarioContaDto> buscarPorId(Long id) {
+        var usuarioCriacao = usuarioContaRepository.getReferenceById(id);
         if (usuarioCriacao != null) {
-            UsuarioCriacaoDto obj = mapper.map(usuarioCriacao, UsuarioCriacaoDto.class);
+            UsuarioContaDto obj = mapper.map(usuarioCriacao, UsuarioContaDto.class);
 
             return Optional.of(obj);
         }else{
@@ -37,9 +35,9 @@ public class UsuarioCriacaoServiceImpl implements UsuarioCriacaoService {
     }
 
     @Override
-    public UsuarioCriacaoDto salvar(UsuarioCriacaoDto usuarioCriacaoDto) {
+    public UsuarioContaDto salvar(UsuarioContaDto usuarioContaDto) {
         //Entidade UsuarioCriacao
-        var usuarioCriacao = this.mapper.map(usuarioCriacaoDto, UsuarioCriacao.class);
+        var usuarioCriacao = this.mapper.map(usuarioContaDto, UsuarioConta.class);
 
         // Entidade Plano
         var tagPlano = planoRepository.getReferenceByTagPlano(usuarioCriacao.getTagPlano());
@@ -55,25 +53,25 @@ public class UsuarioCriacaoServiceImpl implements UsuarioCriacaoService {
         var dtExpiracao = usuarioCriacao.getDtCriacao().plusMonths(tagPlano.getDuracaoEmMeses());
         usuarioCriacao.setDtExpiracao(dtExpiracao);
 
-        var usuarioCriado = usuarioCriacaoRepository.save(usuarioCriacao);
+        var usuarioCriado = usuarioContaRepository.save(usuarioCriacao);
 
 
-        return mapper.map(usuarioCriado, UsuarioCriacaoDto.class);
+        return mapper.map(usuarioCriado, UsuarioContaDto.class);
     }
     @Override
-    public Long alterar(UsuarioCriacaoDto usuarioCriacaoDto) {
+    public Long alterar(UsuarioContaDto usuarioContaDto) {
 
-        if (usuarioCriacaoDto.getId() == null) {
+        if (usuarioContaDto.getId() == null) {
             throw new IllegalArgumentException("ID do usuario não pode ser nulo para atualização");
         }
 
-        var usuarioExistente = usuarioCriacaoRepository.getReferenceById(usuarioCriacaoDto.getId());
+        var usuarioExistente = usuarioContaRepository.getReferenceById(usuarioContaDto.getId());
 
 
         // Atualize os campos relevantes da tarefa existente com os valores do DTO
-        mapper.map(usuarioCriacaoDto, usuarioExistente);
+        mapper.map(usuarioContaDto, usuarioExistente);
 
-        UsuarioCriacao usuarioAtualizada = usuarioCriacaoRepository.save(usuarioExistente);
+        UsuarioConta usuarioAtualizada = usuarioContaRepository.save(usuarioExistente);
 
         return usuarioAtualizada.getId();
     }

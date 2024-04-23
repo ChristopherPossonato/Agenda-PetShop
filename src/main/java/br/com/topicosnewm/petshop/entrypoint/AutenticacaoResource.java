@@ -1,6 +1,6 @@
 package br.com.topicosnewm.petshop.entrypoint;
 
-import br.com.topicosnewm.petshop.dataprovider.model.UsuarioCriacao;
+import br.com.topicosnewm.petshop.dataprovider.model.UsuarioConta;
 import br.com.topicosnewm.petshop.dto.DadosTokenDto;
 import br.com.topicosnewm.petshop.dto.UsuarioLoginDto;
 import br.com.topicosnewm.petshop.service.security.TokenService;
@@ -30,7 +30,7 @@ public class AutenticacaoResource {
         var authenticationTokentoken = new UsernamePasswordAuthenticationToken(usuarioLoginDto.getLogin(), usuarioLoginDto.getPassword());
         var authentication = authenticationManager.authenticate(authenticationTokentoken);
 
-        var tokenJWT = tokenService.gerarToken((UsuarioCriacao) authentication.getPrincipal());
+        var tokenJWT = tokenService.gerarToken((UsuarioConta) authentication.getPrincipal());
         return ResponseEntity.ok(new DadosTokenDto(tokenJWT));
     }
 }

@@ -1,10 +1,9 @@
-package br.com.topicosnewm.petshop.entrypoint.model.usuariocriacao;
+package br.com.topicosnewm.petshop.entrypoint.model.usuarioconta;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @JsonPropertyOrder({
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
         "password",
         "tagPlano"
 })
-public class UsuarioCriacaoRequest {
+public class UsuarioContaRequest {
     private Long id;
     private String nome;
     private String sobrenome;

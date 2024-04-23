@@ -1,4 +1,4 @@
-package br.com.topicosnewm.petshop.entrypoint.model.agendamento;
+package br.com.topicosnewm.petshop.entrypoint.model.agenda;
 
 import br.com.topicosnewm.petshop.dataprovider.model.*;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -10,19 +10,19 @@ import java.time.LocalDateTime;
 @Data
 @JsonPropertyOrder({
         "dataHora",
-        "trasnporte",
+        "transporte",
         "pacote",
         "status",
         "tutor",
         "animal",
         "funcionario",
 })
-public class AgendamentoRequest {
+public class AgendaRequest {
     private Long id;
     private LocalDateTime dataHora;
     private Boolean transporte;
     private Pacote pacote;
-    private LocalDate dataVencimento;
+    private LocalDateTime dataVencimento;
     private StatusAgendamento statusAgendamento;
     private Boolean status;
     private Tutor tutor;

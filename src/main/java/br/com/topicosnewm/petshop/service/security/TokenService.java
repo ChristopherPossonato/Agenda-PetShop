@@ -1,6 +1,6 @@
 package br.com.topicosnewm.petshop.service.security;
 
-import br.com.topicosnewm.petshop.dataprovider.model.UsuarioCriacao;
+import br.com.topicosnewm.petshop.dataprovider.model.UsuarioConta;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -17,12 +17,12 @@ public class TokenService {
     @Value("${app.jwt.secret}")
     private String secretKey ;
 
-    public String gerarToken(UsuarioCriacao usuarioCriacao) {
+    public String gerarToken(UsuarioConta usuarioConta) {
         try {
             var algorithm = Algorithm.HMAC256(secretKey);
             return JWT.create()
                     .withIssuer("API Topicos NewM")
-                    .withSubject(usuarioCriacao.getLogin())
+                    .withSubject(usuarioConta.getLogin())
                     .withExpiresAt(dataExpiracao())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {

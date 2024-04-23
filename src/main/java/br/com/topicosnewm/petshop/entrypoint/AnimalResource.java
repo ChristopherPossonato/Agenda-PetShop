@@ -18,4 +18,5 @@ public class AnimalResource {
 
     @Autowired
     private ModelMapper mapper;
+
 }

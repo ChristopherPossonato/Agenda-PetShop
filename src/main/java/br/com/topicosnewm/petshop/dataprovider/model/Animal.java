@@ -2,11 +2,13 @@ package br.com.topicosnewm.petshop.dataprovider.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name = "animais")
 @Data
+@Builder
 public class Animal {
 
     @Id

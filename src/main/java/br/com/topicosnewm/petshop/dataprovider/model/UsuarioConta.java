@@ -4,43 +4,53 @@ package br.com.topicosnewm.petshop.dataprovider.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "usuario_criacao")
+@Table(name = "usuario_conta")
 @Data
-public class UsuarioCriacao implements UserDetails {
+public class UsuarioConta implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank
+    @Column(name = "nome_usuario")
     private String nome;
-    @NotBlank
+
+    @Column(name = "sobrenome")
     private String sobrenome;
-    @NotBlank
+
+    @Column(name = "cpf_cnpj", nullable = false, unique = true)
+    private String cpfCnpj;
+
     @Email(message = "Formato do e-mail está incorreto")
+    @Column(name = "email")
     private String email;
-    @Column(unique = true)
+
+    @Column(name = "login", unique = true)
     @NotBlank
     private String login;
+
+    @Column(name = "password")
     @NotBlank
     private String password;
 
+    @Column(name = "dt_criacao")
     private LocalDateTime dtCriacao;
 
+    @Column(name = "ativo")
     private Boolean ativo;
 
+    @Column(name = "tag_plano")
     private Byte tagPlano;
 
     @ManyToOne

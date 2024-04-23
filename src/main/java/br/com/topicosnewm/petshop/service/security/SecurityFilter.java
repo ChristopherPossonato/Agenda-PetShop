@@ -1,6 +1,6 @@
 package br.com.topicosnewm.petshop.service.security;
 
-import br.com.topicosnewm.petshop.dataprovider.repository.UsuarioCriacaoRepository;
+import br.com.topicosnewm.petshop.dataprovider.repository.UsuarioContaRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,14 +18,14 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UsuarioCriacaoRepository usuarioCriacaoRepository;
+    private UsuarioContaRepository usuarioContaRepository;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var tokenJWT = recuperarToken(request);
 
         if(tokenJWT != null) {
             var subject = tokenService.getSubject(tokenJWT);
-            var usuarioCriacao = usuarioCriacaoRepository.findByLogin(subject);
+            var usuarioCriacao = usuarioContaRepository.findByLogin(subject);
             var authentication = new UsernamePasswordAuthenticationToken(usuarioCriacao, null, usuarioCriacao.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
