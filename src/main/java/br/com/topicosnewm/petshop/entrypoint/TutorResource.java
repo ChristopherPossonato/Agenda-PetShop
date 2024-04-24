@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tutor")
+@RequestMapping("/tutores")
 @Api(tags = "Tutor", description = "Controller de tutor")
 public class TutorResource {
     @Autowired

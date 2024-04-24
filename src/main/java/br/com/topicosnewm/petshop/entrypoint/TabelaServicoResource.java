@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/servico")
+@RequestMapping("/servicos")
 @Api(tags = "Tabela Serviço", description = "Controller de serviços")
 public class TabelaServicoResource {
 
@@ -35,7 +35,7 @@ public class TabelaServicoResource {
         var precoServicoSalvo = tabelaServicoService.salvar(precoServicoDto);
 
 
-        var uri = uriComponentsBuilder.path("/servico/{id}").buildAndExpand(precoServicoSalvo.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/servicos/{id}").buildAndExpand(precoServicoSalvo.getId()).toUri();
         return ResponseEntity.created(uri).body(precoServicoSalvo);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.topicosnewm.petshop.service.usuarioconta.impl;
 
+import br.com.topicosnewm.petshop.dataprovider.model.UserRole;
 import br.com.topicosnewm.petshop.dataprovider.model.UsuarioConta;
 import br.com.topicosnewm.petshop.dataprovider.repository.PlanoRepository;
 import br.com.topicosnewm.petshop.dataprovider.repository.UsuarioContaRepository;
@@ -50,6 +51,7 @@ public class UsuarioContaServiceImpl implements UsuarioContaService {
 
         usuarioCriacao.setDtCriacao(LocalDateTime.now());
         usuarioCriacao.setAtivo(true);
+        usuarioCriacao.setRole(UserRole.ADMIN);
         String senhaCodificada = passwordEncoder.encode(usuarioCriacao.getPassword());
         usuarioCriacao.setPassword(senhaCodificada);
         var dtExpiracao = usuarioCriacao.getDtCriacao().plusMonths(tagPlano.getDuracaoEmMeses());

@@ -35,7 +35,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/criacao","/login").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/planos").hasRole("SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/planos").hasAnyAuthority("SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/servicos", "/funcionarios").hasAnyAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/agendamentos", "/tutores" , "/animais").hasAnyAuthority("USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

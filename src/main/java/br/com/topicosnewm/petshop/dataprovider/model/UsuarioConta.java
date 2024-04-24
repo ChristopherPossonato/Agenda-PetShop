@@ -63,10 +63,22 @@ public class UsuarioConta implements UserDetails {
     @Column(name = "dt_expiracao")
     private LocalDateTime dtExpiracao;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.role == UserRole.SUPER_ADMIN) {
+            return List.of(new SimpleGrantedAuthority("SUPER_ADMIN")
+                    ,new SimpleGrantedAuthority("ADMIN")
+                    , new SimpleGrantedAuthority("USER"));
+        }else if (this.role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ADMIN")
+                    , new SimpleGrantedAuthority("USER"));
+        } else {
+            return  List.of(new SimpleGrantedAuthority("USER"));
+        }
     }
 
     @Override
