@@ -21,9 +21,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Api(tags = "Cadastro Plano", description = "Controller de cadastro plano")
 public class PlanoResource {
 
-
     @Autowired
     private ModelMapper mapper;
+//    public PlanoResource(ModelMapper mapper){
+//        this.mapper = new ModelMapper();
+//    }
     @Autowired
     private PlanoService planoService;
 

@@ -1,10 +1,10 @@
 package br.com.topicosnewm.petshop.dataprovider.model;
 
 public enum Pacote {
-    DIA_UNICO("Dia unico"),
-    QUINZENAL("Quinzenal"),
-    SEMANAL("Semanal"),
-    MENSAL("Mensal");
+    DIA_UNICO("DIA_UNICO"),
+    QUINZENAL("QUINZENAL"),
+    SEMANAL("SEMANAL"),
+    MENSAL("MENSAL");
 
     private final String descricao;
 

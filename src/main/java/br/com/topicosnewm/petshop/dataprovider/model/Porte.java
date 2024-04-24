@@ -1,11 +1,11 @@
 package br.com.topicosnewm.petshop.dataprovider.model;
 
 public enum Porte {
-    MINI("Mini"),
-    PEQUENO("Pequeno"),
-    MEDIO("Médio"),
-    GRANDE("Grande"),
-    GIGANTE("Gigante");
+    MINI("MINI"),
+    PEQUENO("PEQUENO"),
+    MEDIO("MEDIO"),
+    GRANDE("GRANDE"),
+    GIGANTE("GIGANTE");
 
     private final String descricao;
 

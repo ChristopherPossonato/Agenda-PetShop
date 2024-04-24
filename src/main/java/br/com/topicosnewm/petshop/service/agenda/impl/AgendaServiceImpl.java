@@ -1,20 +1,21 @@
 package br.com.topicosnewm.petshop.service.agenda.impl;
 
 import br.com.topicosnewm.petshop.dataprovider.model.*;
-import br.com.topicosnewm.petshop.dataprovider.repository.AgendaRepository;
-import br.com.topicosnewm.petshop.dataprovider.repository.AnimalRepository;
-import br.com.topicosnewm.petshop.dataprovider.repository.FuncionarioRepository;
-import br.com.topicosnewm.petshop.dataprovider.repository.TutorRepository;
+import br.com.topicosnewm.petshop.dataprovider.repository.*;
 import br.com.topicosnewm.petshop.dto.AgendaDto;
+import br.com.topicosnewm.petshop.dto.AnimalDto;
+import br.com.topicosnewm.petshop.dto.EnderecoDto;
+import br.com.topicosnewm.petshop.dto.TutorDto;
 import br.com.topicosnewm.petshop.service.agenda.AgendaService;
 import br.com.topicosnewm.petshop.utils.DataExpiracaoUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutorCompletionService;
 
 @Service
 public class AgendaServiceImpl implements AgendaService {
@@ -27,54 +28,82 @@ public class AgendaServiceImpl implements AgendaService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
     @Autowired
+    private TabelaServicoRepository tabelaServicoRepository;
+    @Autowired
     private ModelMapper mapper;
 
     @Override
     public AgendaDto agendar(AgendaDto agendaDto) {
+
+        Tutor objTutor = salvarTutor(agendaDto);
+
+        var tutorSalvo = tutorRepository.save(objTutor);
+
+        salvarAnimal(agendaDto, tutorSalvo);
+
         var agenda = this.mapper.map(agendaDto, Agenda.class);
 
-        var bloco = agenda.getTutor().getEndereco().getBloco();
-        bloco = bloco == null ? bloco = "N/I" : bloco;
-        var apartamento = agenda.getTutor().getEndereco().getApartamento();
-        apartamento = apartamento == null ? apartamento = "N/I" : apartamento;
 
-        var endereco = Endereco.builder()
-                .logradouro(agenda.getTutor().getEndereco().getLogradouro())
-                .bairro(agenda.getTutor().getEndereco().getBairro())
-                .numero(agenda.getTutor().getEndereco().getNumero())
-                .bloco(bloco)
-                .apartamento(apartamento)
-                .build();
+        TabelaServico tabelaServico = tabelaServicoRepository.findByTabelaServico(
+                agenda.getPacote()
+                ,agenda.getTutor().getAnimais().getFirst().getPorte()
+                ,"Banho"
+        );
+        agenda.setTabelaServico(tabelaServico);
+        agenda.setTutor(tutorSalvo);
+        agenda.setStatusAgendamento(StatusAgendamento.PENDENTE);
+        agenda.setStatus(true);
+        agenda.setDataVencimento(DataExpiracaoUtil.calcularDataExpiracao(agenda.getDataHora(), agenda.getPacote()));
 
-        var tutor = Tutor.builder()
-                .nomeTutor(agenda.getTutor().getNomeTutor())
-                .telefone(agenda.getTutor().getTelefone())
-                .endereco(endereco)
-                .animais(new ArrayList<>()) // Inicializa uma nova lista para os animais do tutor
-                .build();
+        var agendar = agendaRepository.save(agenda);
 
-        // Salva o tutor no banco de dados
-        var tutorSalvo = tutorRepository.save(tutor);
+        return mapper.map(agendar, AgendaDto.class);
+    }
 
-        // Salva os animais associados ao novo tutor
+    private void salvarAnimal(AgendaDto agendaDto, Tutor tutor) {
+        var agenda = mapper.map(agendaDto, Agenda.class);
+
         agenda.getTutor().getAnimais().forEach(a -> {
-            var salvarAnimal = Animal.builder()
+            var animalDto = AnimalDto.builder()
                     .nomeAnimal(a.getNomeAnimal())
                     .raca(a.getRaca())
                     .porte(a.getPorte())
-                    .tutor(tutorSalvo) // Usa o tutor recém-salvo para associar aos animais
+                    .tutor(tutor)
                     .build();
-            animalRepository.save(salvarAnimal);
+            var salvarAnimal = mapper.map(animalDto, Animal.class);
+           animalRepository.save(salvarAnimal);
         });
 
-        // Atualiza o tutor na agenda para usar o tutor salvo
-        agenda.setTutor(tutorSalvo);
+    }
 
-        agenda.setStatusAgendamento(StatusAgendamento.PENDENTE);
-        agenda.setStatus(true);
-        agenda.setDataVencimento(DataExpiracaoUtil.calcularDataExpiracao(agenda.getDataHora(), agenda.getTabelaServico().getPacote()));
-        agendaRepository.save(agenda);
 
-        return mapper.map(agenda, AgendaDto.class);
+    public Tutor salvarTutor(AgendaDto agendaDto) {
+        var bloco = "N/I";
+        var apartamento = "N/I";
+        var complemento = "N/I";
+        if (agendaDto.getTutor() != null && agendaDto.getTutor().getEndereco() != null) {
+            bloco = agendaDto.getTutor().getEndereco().getBloco();
+            apartamento = agendaDto.getTutor().getEndereco().getApartamento();
+            agendaDto.getTutor().getEndereco().getComplemento();
+        }
+        var endereco = Endereco.builder()
+                .logradouro(agendaDto.getTutor().getEndereco().getLogradouro())
+                .bairro(agendaDto.getTutor().getEndereco().getBairro())
+                .complemento(complemento == null ? complemento = "N/I" : complemento)
+                .numero(agendaDto.getTutor().getEndereco().getNumero())
+                .bloco(bloco == null ? bloco = "N/I" : bloco)
+                .apartamento(apartamento == null ? apartamento = "N/I" : apartamento)
+                .build();
+
+        var tutor = Tutor.builder()
+                .nomeTutor(agendaDto.getTutor().getNomeTutor())
+                .telefone(agendaDto.getTutor().getTelefone())
+                .endereco(endereco)
+                .animais(new ArrayList<>())
+                .build();
+
+        return tutor;
     }
 }
+
+

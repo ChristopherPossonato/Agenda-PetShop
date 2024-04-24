@@ -1,12 +1,12 @@
 package br.com.topicosnewm.petshop.dataprovider.model;
 
 public enum StatusAgendamento {
-    PENDENTE("Pendente"),
-    CHEGOU("Chegou"),
-    EM_BANHO("Em banho"),
-    PRONTO_TUTOR_AVISADO("Pet pronto e tutor avisado"),
-    SAIU("Saiu"),
-    CANCELADO("Cancelado");
+    PENDENTE("PENDENTE"),
+    CHEGOU("CHEGOU"),
+    EM_BANHO("EM_BANHO"),
+    PRONTO_TUTOR_AVISADO("PRONTO_TUTOR_AVISADO"),
+    SAIU("SAIU"),
+    CANCELADO("CANCELADO");
 
     private final String descricao;
 

@@ -15,7 +15,7 @@ public class AgendaDto {
     private LocalDateTime dataVencimento;
     private StatusAgendamento statusAgendamento;
     private Boolean status;
-    private Tutor tutor;
-    private Animal animal;
-    private Funcionario funcionario;
+    private TutorDto tutor;
+    private FuncionarioDto funcionario;
+    private TabelaServicoDto tabelaServico;
 }

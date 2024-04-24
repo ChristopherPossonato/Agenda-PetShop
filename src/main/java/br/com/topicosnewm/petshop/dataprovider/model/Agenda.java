@@ -2,21 +2,26 @@ package br.com.topicosnewm.petshop.dataprovider.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "agendamentos")
+@Table(name = "agenda")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Agenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @Future
     @Column(name = "data_hora")
     private LocalDateTime dataHora;
     @Column(name = "transporte")
@@ -28,6 +33,9 @@ public class Agenda {
     @Enumerated(EnumType.STRING)
     @Column(name = "status_agendamento")
     private StatusAgendamento statusAgendamento;
+
+    @Enumerated(EnumType.STRING)
+    private Pacote  pacote;
 
     @Column(name = "status")
     private Boolean status;

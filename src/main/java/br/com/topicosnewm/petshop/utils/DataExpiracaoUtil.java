@@ -1,6 +1,8 @@
 package br.com.topicosnewm.petshop.utils;
 
 import br.com.topicosnewm.petshop.dataprovider.model.Pacote;
+import jakarta.persistence.Access;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -8,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 
 public class DataExpiracaoUtil {
-
     public static LocalDateTime calcularDataExpiracao(LocalDateTime dataInicio, Pacote pacote) {
         if (pacote == Pacote.DIA_UNICO) {
             return dataInicio;

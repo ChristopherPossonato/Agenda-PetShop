@@ -1,7 +1,12 @@
 package br.com.topicosnewm.petshop.entrypoint.model.agenda;
 
 import br.com.topicosnewm.petshop.dataprovider.model.*;
+import br.com.topicosnewm.petshop.dto.FuncionarioDto;
+import br.com.topicosnewm.petshop.dto.TabelaServicoDto;
+import br.com.topicosnewm.petshop.dto.TutorDto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -12,20 +17,19 @@ import java.time.LocalDateTime;
         "dataHora",
         "transporte",
         "pacote",
-        "status",
-        "tutor",
-        "animal",
-        "funcionario",
+        "tutor"
 })
 public class AgendaRequest {
     private Long id;
     private LocalDateTime dataHora;
     private Boolean transporte;
+    @Enumerated(EnumType.STRING)
     private Pacote pacote;
     private LocalDateTime dataVencimento;
     private StatusAgendamento statusAgendamento;
     private Boolean status;
-    private Tutor tutor;
-    private Animal animal;
-    private Funcionario funcionario;
+    private TutorDto tutor;
+    private FuncionarioDto funcionario;
+    private TabelaServicoDto tabelaServico;
 }
+
