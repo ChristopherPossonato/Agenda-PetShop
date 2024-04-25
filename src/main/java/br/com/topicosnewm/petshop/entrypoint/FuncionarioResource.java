@@ -2,7 +2,7 @@ package br.com.topicosnewm.petshop.entrypoint;
 
 import br.com.topicosnewm.petshop.dto.FuncionarioDto;
 import br.com.topicosnewm.petshop.entrypoint.model.funcionario.FuncionarioRequest;
-import br.com.topicosnewm.petshop.service.funcionario.FuncionarioService;
+import br.com.topicosnewm.petshop.usecase.funcionario.FuncionarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;

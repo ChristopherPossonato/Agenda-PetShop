@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EnderecoDto{
+public class EnderecoDto {
         private String logradouro;
 
         private String numero;

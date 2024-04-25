@@ -1,6 +1,6 @@
 package br.com.topicosnewm.petshop.entrypoint;
 
-import br.com.topicosnewm.petshop.service.tutor.TutorService;
+import br.com.topicosnewm.petshop.usecase.tutor.TutorService;
 import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

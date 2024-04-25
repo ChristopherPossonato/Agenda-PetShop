@@ -2,7 +2,7 @@ package br.com.topicosnewm.petshop.entrypoint;
 
 import br.com.topicosnewm.petshop.dto.PlanoDto;
 import br.com.topicosnewm.petshop.entrypoint.model.plano.PlanoRequest;
-import br.com.topicosnewm.petshop.service.plano.PlanoService;
+import br.com.topicosnewm.petshop.usecase.plano.PlanoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;

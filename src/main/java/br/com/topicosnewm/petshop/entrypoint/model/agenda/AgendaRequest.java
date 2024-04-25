@@ -16,14 +16,16 @@ import java.time.LocalDateTime;
 @JsonPropertyOrder({
         "dataHora",
         "transporte",
+        "tipoServico",
         "pacote",
         "tutor"
+
 })
 public class AgendaRequest {
     private Long id;
     private LocalDateTime dataHora;
+    private String tipoServico;
     private Boolean transporte;
-    @Enumerated(EnumType.STRING)
     private Pacote pacote;
     private LocalDateTime dataVencimento;
     private StatusAgendamento statusAgendamento;
@@ -31,5 +33,6 @@ public class AgendaRequest {
     private TutorDto tutor;
     private FuncionarioDto funcionario;
     private TabelaServicoDto tabelaServico;
+    private Double valor;
 }
 

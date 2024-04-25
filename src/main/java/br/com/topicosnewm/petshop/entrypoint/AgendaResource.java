@@ -2,10 +2,11 @@ package br.com.topicosnewm.petshop.entrypoint;
 
 import br.com.topicosnewm.petshop.dto.AgendaDto;
 import br.com.topicosnewm.petshop.entrypoint.model.agenda.AgendaRequest;
-import br.com.topicosnewm.petshop.service.agenda.AgendaService;
-import br.com.topicosnewm.petshop.service.animal.AnimalService;
-import br.com.topicosnewm.petshop.service.funcionario.FuncionarioService;
-import br.com.topicosnewm.petshop.service.tutor.TutorService;
+import br.com.topicosnewm.petshop.exception.CustomException;
+import br.com.topicosnewm.petshop.usecase.agenda.AgendaService;
+import br.com.topicosnewm.petshop.usecase.animal.AnimalService;
+import br.com.topicosnewm.petshop.usecase.funcionario.FuncionarioService;
+import br.com.topicosnewm.petshop.usecase.tutor.TutorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;

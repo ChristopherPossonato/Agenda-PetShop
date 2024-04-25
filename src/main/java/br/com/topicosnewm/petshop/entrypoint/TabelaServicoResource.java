@@ -2,7 +2,7 @@ package br.com.topicosnewm.petshop.entrypoint;
 
 import br.com.topicosnewm.petshop.dto.TabelaServicoDto;
 import br.com.topicosnewm.petshop.entrypoint.model.tabelaservico.TabelaServicoRequest;
-import br.com.topicosnewm.petshop.service.tabelaservico.TabelaServicoService;
+import br.com.topicosnewm.petshop.usecase.tabelaservico.TabelaServicoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;

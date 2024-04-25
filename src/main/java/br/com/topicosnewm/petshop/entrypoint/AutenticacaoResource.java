@@ -3,7 +3,7 @@ package br.com.topicosnewm.petshop.entrypoint;
 import br.com.topicosnewm.petshop.dataprovider.model.UsuarioConta;
 import br.com.topicosnewm.petshop.dto.DadosTokenDto;
 import br.com.topicosnewm.petshop.dto.UsuarioLoginDto;
-import br.com.topicosnewm.petshop.service.security.TokenService;
+import br.com.topicosnewm.petshop.usecase.security.TokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;

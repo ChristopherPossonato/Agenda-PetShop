@@ -1,6 +1,6 @@
 package br.com.topicosnewm.petshop.config;
 
-import br.com.topicosnewm.petshop.service.security.SecurityFilter;
+import br.com.topicosnewm.petshop.usecase.security.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

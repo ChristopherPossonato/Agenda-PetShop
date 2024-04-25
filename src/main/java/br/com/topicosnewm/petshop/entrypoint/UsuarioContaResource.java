@@ -2,7 +2,7 @@ package br.com.topicosnewm.petshop.entrypoint;
 
 import br.com.topicosnewm.petshop.dto.UsuarioContaDto;
 import br.com.topicosnewm.petshop.entrypoint.model.usuarioconta.UsuarioContaRequest;
-import br.com.topicosnewm.petshop.service.usuarioconta.UsuarioContaService;
+import br.com.topicosnewm.petshop.usecase.usuarioconta.UsuarioContaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
